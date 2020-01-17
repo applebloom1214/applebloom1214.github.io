@@ -9,6 +9,9 @@ Webjeda Gatok is a Bootstrap based theme. Any Bootstrap element can be used in t
 
 The name Gatok is a short form of [Ghatotkacha](https://en.wikipedia.org/wiki/Ghatotkacha){: target="_blank"} who was a monster in the Hindu mythology Mahabharatha.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/CQfMESovtao&list=RD12Ij5DlO_EI&index=4" frameborder="0" allowfullscreen></iframe>
+
+
 ![Gatok Jekyll Theme]({{site.baseurl}}/images/gatok.jpg)
 
 He is someone you shouldn't be messing with!
