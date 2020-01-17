@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: 나에 대해서
 permalink: /about/
 ---
 <div class="mt50"></div>
