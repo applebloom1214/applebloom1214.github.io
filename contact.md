@@ -7,7 +7,7 @@ permalink: /tlist/
 
 
 ![Gatok Jekyll Theme]({{site.baseurl}}/images/java.png)<br>
-**JAVA(中)**
+&nbsp;**JAVA(中)**
 
 
 <br>
