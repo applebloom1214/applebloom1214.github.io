@@ -1,6 +1,6 @@
 ---
 layout: page
-title:보유 기술
+title: 보유 기술
 permalink: /tlist/
 ---
 
