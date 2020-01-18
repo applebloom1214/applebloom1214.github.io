@@ -91,12 +91,4 @@ IT 최신 동향, 프로젝트 경험 등을 할 수 있어 뜻깊은 시간이�
 
 
 
-The name Gatok is a short form of [Ghatotkacha](https://en.wikipedia.org/wiki/Ghatotkacha){: target="_blank"} who was a monster in the Hindu mythology Mahabharatha.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/8vL_nWjFTPk" frameborder="0" allowfullscreen></iframe>
-
-
-[**Watch his story**](https://www.youtube.com/watch?v=6gYv6S1dCqs){: target="_blank"}
-
-
-Read [Webjeda Blog](http://blog.webjeda.com){: target="_blank"} for jekyll tutorials. 
