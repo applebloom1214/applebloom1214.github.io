@@ -14,7 +14,7 @@ permalink: /tlist/
 
 ![Gatok Jekyll Theme]({{site.baseurl}}/images/html.png)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**HTML/CSS(下)**<br><br>
-기본적인 태그 활용을 할 수 있으며 CSS는 참조하는 식으로 어떻게 해서 적용이 되는지 이행하는 정도로 습득했습니다.
+기본적인 태그 활용을 할 수 있으며 CSS는 참조하는 식으로 어떻게 해서 적용이 되는지 이해하는 정도로 습득했습니다.
 
 <br>
 ![Gatok Jekyll Theme]({{site.baseurl}}/images/jsp.png)<br>
