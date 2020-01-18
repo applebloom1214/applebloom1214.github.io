@@ -5,9 +5,8 @@ permalink: /tlist/
 ---
 
 
-보유기술
 
-![Gatok Jekyll Theme]({{site.baseurl}}/images/java.png)
+![Gatok Jekyll Theme]({{site.baseurl}}/images/java.png)ㅇㅇ
 
 <br>
 
