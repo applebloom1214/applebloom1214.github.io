@@ -89,17 +89,11 @@ IT 최신 동향, 프로젝트 경험 등을 할 수 있어 뜻깊은 시간이�
 <br>
 시작이 늦었기에 남들과 비교해가며 갈팡질팡하기보다는 자신과 싸워 이기며 대기만성의 프로그래머가 되겠습니다.
 
-Webjeda Gatok is a Bootstrap based theme. Any Bootstrap element can be used in the theme.
+
 
 The name Gatok is a short form of [Ghatotkacha](https://en.wikipedia.org/wiki/Ghatotkacha){: target="_blank"} who was a monster in the Hindu mythology Mahabharatha.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8vL_nWjFTPk" frameborder="0" allowfullscreen></iframe>
-
-
-![Gatok Jekyll Theme]({{site.baseurl}}/images/다운로드.png)
-
-He is someone you shouldn't be messing with!
-![Gatok Jekyll Theme]({{site.baseurl}}/images/gatok-2.jpg)
 
 
 [**Watch his story**](https://www.youtube.com/watch?v=6gYv6S1dCqs){: target="_blank"}
