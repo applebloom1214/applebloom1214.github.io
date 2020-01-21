@@ -45,7 +45,8 @@ permalink: /tlist/
 ![Gatok Jekyll Theme]({{site.baseurl}}/images/spring.png)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**SPRING FRAMEWORK(下)**<br><br>
 개인 프로젝트를 진행하면서 '코드로 배우는 스프링 웹 프로젝트' 저서를 보면서 스프링의 기본을 습득했고, <br>
-부족한 부분은 '토비의 스프링' 이라는 저서는 아직은 이해하기에 난해한 부분이 있어 차근차근 읽고 있습니다.<br>
+부족한 부분은 '토비의 스프링' 이라는 저서는 아직은 이해하기에 난해한 부분이 있어 차근차근 읽어가며<br>
+IOC(제어의 역행),AOP(관점 지향 프로그래밍), DI(의존성 주입) 같은 스프링의 주요 개념을 익히고 있습니다.<br>
 
 
 <br>
