@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "개발환경"
+title:  "설계 구조"
 ---
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/class.png)
  
