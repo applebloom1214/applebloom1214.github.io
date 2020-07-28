@@ -2,6 +2,11 @@
 layout: post
 title:  "설계 구조"
 ---
+## HappyProg 자바 패키지 구조
+
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/class.png)
- 
+
+
+## HappyProg DB 모델링
+
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/db2.PNG)
