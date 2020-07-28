@@ -33,5 +33,3 @@ HappyFrog 웹사이트의 모토는 "누구나 쉽게 유머글을 올리고 남
 - Mybatis
 - Tomcat
 - Maven
-<br>
-<br>
