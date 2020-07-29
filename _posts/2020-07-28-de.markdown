@@ -27,8 +27,8 @@ title:  "설계 구조 및 기본 동작 과정"
  서비스는 요청에 필요한 작업을 대부분 담당하며 DB 접근이 필요하면, DAO를 주입받아 DB 처리는 DAO에게 위임한다.
  하지만 본 프로젝트는 전통적인 DAO대신 편리성이 좋은 Mybatis의 Mapper를 통해 SQL쿼리를 날려 DB의 정보를 받아 다시 서비스에게 전달한다.
  (쿼리의 결과는 VO에 담아서 주고 받는다.)<br>
- ![Gatok Jekyll Theme]({{site.baseurl}}/images/1-5.PNG)
- ![Gatok Jekyll Theme]({{site.baseurl}}/images/1-6.PNG)
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/1-5.PNG)<br>
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/1-6.PNG)<br>
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/1-7.PNG)
  
  모든 로직을 끝낸 서비스가 결과를 컨트롤러에게 넘긴다.<br>
