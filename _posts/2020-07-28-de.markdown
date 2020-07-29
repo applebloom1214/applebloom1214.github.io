@@ -43,7 +43,7 @@ title:  "설계 구조 및 기본 동작 과정"
  ViewResolver는 해당 JSP를 찾아서 DispatcherServlet에게 알려준다.
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/1-11.PNG)
  
- DispatcherServlet은 응답할 View에게 Render를 지시하고 View는 응답 로직을 처리한다.
+ DispatcherServlet은 응답할 View에게 Render를 지시하고 View는 응답 로직을 처리한다.<br>
  결과적으로 DispatcherServlet이 클라이언트에게 렌더링된 View를 응답한다.<br>
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/1-12.PNG)
  
