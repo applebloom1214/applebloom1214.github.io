@@ -95,6 +95,7 @@ $('#btnsign').on("click", function(e){
   <br>
 중복 아이디 체크<br>
 ~~~c
+//BoardServiceImpl.java
 	@Override
 	public int idCheck(MemberVO mem) {
 		
@@ -189,12 +190,14 @@ public class CustomUser extends User {
  <br>
  시큐리티 기본 설정<br>
  ~~~c
+ //security-context.xml
  <security:logout logout-url="/customLogout" // /customLogout 페이지에서 세션과 쿠키를 삭제하여 로그아웃을 처리
 	invalidate-session="true" delete-cookies="JSESSION_ID" logout-success-url="/"/>
  ~~~
    <br>
   내부 인증 과정 2<br>
   ~~~c
+  //CommonController.java
      //GET OR POST 어느 요청으로 들어와도 내부 로그아웃 처리를 해준다
  	@GetMapping("/customLogout")
 	public void logoutGET() {
@@ -211,5 +214,10 @@ public class CustomUser extends User {
   ~~~
   <br>
   
-## 실기 영상
- 클라이언트가 서버에 어떤 요청을 하면 스프링에서 제공하는 DispatcherServlet라는 Front-Controller가 요청을 가로챈다. 
+## 실기 영상<br>
+ 회원가입<br>
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/1.gif)
+ <br><br>
+ 로그인 & 로그아웃<br>
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/2.gif)
+ 
