@@ -4,4 +4,140 @@ title:  "주요 기능 - 게시글 CURD"
 ---
 ## 개관
 
- ![Gatok Jekyll Theme]({{site.baseurl}}/images/3-1.PNG)
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/3-1.PNG)<br>
+ 테이블 명세<br>
+ |작업|url|method|parameter|form|url 이동|
+|------|---|---|---|---|---|
+|전체 목록|/happy/list|get||||
+|등록 처리|/happy/register|post|모든 항목|y|이동|
+|조회|/happy/read|get|bno=?|||
+|삭제 처리|/happy/remove|post|bno|y|이동|
+|수정 처리|/happy/modify|post|모든 항목|y|이동|
+<br>
+<br>
+## 글등록(CREATE) 동작 과정 및 주요 메소드<br>
+ ■ 글등록 요청 > 컨트롤러 > 서비스 & 구현 > Mybatis(DAO구현) > DB > 컨트롤러 > VIEW로 반환<br> 
+ <br>
+ 로그인된 사용자만 글등록 가능<br>
+ ~~~c
+//list.jsp
+			<sec:authorize access="isAuthenticated()"> // 시큐리티 인가(로그인)가 확인되면 버튼이 나타남
+				<button id='regBtn' type="button" class="btn btn-xs pull-right">글쓰기</button>
+			</sec:authorize>	
+ ~~~
+ <br>
+ ~~~c
+ //BoardController.java
+ @PostMapping("/register")
+	@PreAuthorize("isAuthenticated()") // 시큐리티 인가 확인
+	public String register(BoardVO board, RedirectAttributes rttr) {
+
+		log.info("register: " + board);
+
+		if (board.getAttachList() != null) { //첨부파일 관련, 기타 기능에서 소개
+
+			board.getAttachList().forEach(attach -> log.info(attach));
+
+		}
+		service.register(board);
+
+		rttr.addFlashAttribute("result", board.getBno());
+
+		return "redirect:/happy/list";
+	} 
+ ~~~
+<br>
+## 글읽기(READ) 동작 과정 및 주요 메소드<br>
+ ■ 글읽기 요청 > 컨트롤러 > 서비스 & 구현 > Mybatis(DAO구현) > DB > 컨트롤러 > VIEW로 반환<br> 
+ <br>
+ 페이징<br>
+ ~~~c
+ public class Criteria { // 검색의 기준
+
+  private int pageNum; //페이지 번호
+  private int amount; // 한페이지당 처리할 데이터
+  
+  private String type; // 검색할 타입
+  private String keyword; // 검색할 키워드
+  private String sort; // 정렬 키워드
+
+  public Criteria() { // /list로 최초 접근시 1페이지당 글 10개씩 설정
+    this(1, 10);
+  }
+
+  public Criteria(int pageNum, int amount) {
+    this.pageNum = pageNum;
+    this.amount = amount;
+    //READ 요청시 VIEW의 <a> 태그에 저장된 글번호를 가져와 Criteria VO를 생성하여 보고 있던 페이지를 유지
+  }
+  
+}
+ ~~~
+ <br>
+ 
+<br>
+## 글수정&삭제(UPDATE & DELETE) 동작 과정 및 주요 메소드<br>
+ ■ 글수정 OR 삭제 요청 > 컨트롤러 > 서비스 & 구현 > Mybatis(DAO구현) > DB > 컨트롤러 > VIEW로 반환<br> 
+ <br>
+ 본인 글만 수정 OR 삭제 가능
+ <br>
+ ~~~c
+ //BoardController.java
+ 	@PreAuthorize("principal.username == #board.writer")
+  // principal 객체는 시큐리티에 저장된 사용자 정보를 담고있고, 이를 통해 본인글이 맞는지 확인한다.
+	@PostMapping("/modify") // delete도 같은 구조
+	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+		log.info("modify:" + board);
+
+		if (service.modify(board)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+
+		return "redirect:/happy/list" + cri.getListLink();
+	}
+ ~~~
+ <br><br>
+ ## 검색 및 페이징<br>
+  <br>
+ 주요 메소드
+ <br>
+ ~~~c
+ //PageDTO.java
+  public PageDTO(Criteria cri, int total) { // 다른 메소드에서 구한 총합(total)을 가져온다
+
+    this.cri = cri;
+    this.total = total;
+
+    this.endPage = (int) (Math.ceil(cri.getPageNum() / 10.0)) * 10; // 끝페이지
+
+    this.startPage = this.endPage - 9; // 시작페이지
+
+    int realEnd = (int) (Math.ceil((total * 1.0) / cri.getAmount())); // 총합으로 계산한 끝페이지
+
+    if (realEnd <= this.endPage) {
+      this.endPage = realEnd; // endPage가 realEnd를 넘으면 realEnd로 끝페이지 설정
+    }
+
+    this.prev = this.startPage > 1; // 시작페이지 1페이지보다 크면 "이전" 표시
+
+    this.next = this.endPage < realEnd; // 현재 끝페이지 뒤에 페이지가 더 존재하면 "다음" 표시
+  } 
+ ~~~
+ <br>
+   <br>
+  
+## 실기 영상<br>
+ 글등록<br>
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/3-1.gif)
+ <br><br> 
+ 글읽기<br>
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/3-2.gif)
+ <br><br> 
+ 글수정 & 글삭제<br>
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/3-3.gif)
+ <br><br>
+ 검색 & 페이징<br>
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/3-4.gif)
+ <br><br>  
+ 
+ 
