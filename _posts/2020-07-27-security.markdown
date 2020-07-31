@@ -25,12 +25,12 @@ title:  "주요 기능 - 회원 등록, 로그인, 로그아웃"
 	</filter-mapping>
  ~~~
  <br>
-## 회원가입 동작 과정 및 주요 메소드
+## 회원가입 동작 과정 및 주요 메소드<br>
  ■ 회원가입 요청 > 컨트롤러 > 서비스 & 구현 > Mybatis(DAO구현) > DB > 컨트롤러 > VIEW로 반환<br> 
  <br>
  스프링 시큐리티 접근제한<br>
  ~~~c
- //header2.jsp
+//header2.jsp
 <sec:authorize access="isAnonymous()"> // 모든 사람에게 허용
 	<button type="submit" data-oper='sign' class="btn btn-danger"
 		id="header">등록</button>
@@ -44,8 +44,10 @@ title:  "주요 기능 - 회원 등록, 로그인, 로그아웃"
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" /></sec:authorize>// csrf 공격 방지 
  ~~~
+ 
  <br>
 회원가입 입력값 체크<br>
+
 ~~~c
 //sign.jsp
 $('#btnsign').on("click", function(e){
