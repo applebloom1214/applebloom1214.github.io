@@ -9,9 +9,8 @@ title:  "주요 기능 - 회원 등록, 로그인, 로그아웃"
  웹기반 프로젝트에서 회원가입/로그인/로그아웃을 구현시 쿠키나 세션 등을 사용하는데, <br>
  SPRING에 최적화된 보안 프레임워크인 SPRING SECURITY를 사용하여 이를 구현하였다.<br>
  SPRING SECURITY는 여러 종류의 필터와 인터셉터를 사용하며 내부적으로 보안 처리를 해준다.
-
-## 동작 과정
- 공통<br>
+<br>
+ 공통 과정<br>
  ~~~c
  //web.xml
  	<filter>
@@ -25,7 +24,90 @@ title:  "주요 기능 - 회원 등록, 로그인, 로그아웃"
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
  ~~~
+ <br>
+## 회원가입 동작 과정 및 주요 메소드
+ ■ 회원가입 요청 > 컨트롤러 > 서비스 & 구현 > Mybatis(DAO구현) > DB > 컨트롤러 > VIEW로 반환<br> 
+ <br>
+ 스프링 시큐리티 접근제한<br>
+ ~~~c
+ //header2.jsp
+<sec:authorize access="isAnonymous()"> // 모든 사람에게 허용
+	<button type="submit" data-oper='sign' class="btn btn-danger"
+		id="header">등록</button>
+	<button type="submit" data-oper='login' class="btn btn-success"
+		id="header">로그인</button>
+</sec:authorize>
+<sec:authorize access="isAuthenticated()"> // 인가된 사람에게만 허용
 
+	<button type="submit" data-oper='logout' class="btn btn-success"
+		id="header">로그아웃</button>
+	<input type="hidden" name="${_csrf.parameterName}"
+		value="${_csrf.token}" /></sec:authorize>// csrf 공격 방지 
+ ~~~
+ <br>
+회원가입 입력값 체크<br>
+~~~c
+//sign.jsp
+$('#btnsign').on("click", function(e){
+		    
+	e.preventDefault();
+		    var userid = $("#userid").val();
+		    if(userid.length != 0) userid = 1;
+		    userid = parseInt(userid) || 0;
+		    console.log(userid);
+		    // 입력값이 없으면 0으로 초기화
+		    
+		    var userpw = $("#userpw").val();
+		    if(userpw.length != 0) userpw = 3;
+		    userpw = parseInt(userpw) || 0;
+		    console.log(userpw);
+		    
+		    var userName = $("#userName").val();
+		    if(userName.length != 0) userName = 5;
+		    userName = parseInt(userName) || 0;
+		    console.log(userName);
+		   
+		    var testSign = userid + userpw + userName;
+		    console.log(testSign);
+		    
+		    if(testSign == 4){
+		    	alert('닉네임을 입력해주세요');
+		    	return;
+		    }else if(testSign ==6){
+		    	alert('패스워드를 입력해주세요');
+		    	return;
+		    }else if(testSign ==8){
+		    	alert('아이디를 입력해주세요');
+		    	return;
+		    }else if(testSign ==9){
+		    	formObj.submit();
+		    }else{
+		    	alert('항목을 모두 입력해주세요');
+		    	return;
+		    }
+		        //계산을 통해 미입력 값 체크
+		    });		 						
+
+					});//end
+~~~
+  <br>
+중복 아이디 체크<br>
+~~~c
+	@Override
+	public int idCheck(MemberVO mem) {
+		
+		mem.setUserpw(pwencoder.encode(mem.getUserpw()));
+		// BCryptPasswordEncoder(pwencoder)를 통해 비밀번호를 암호화시킨 후 VO의 비밀번호를 수정한다.
+		if(mapper.idCheck(mem) != null) {
+		// mapper에 등록된 idCheck SQL을 통해 같은 이름(PK로 설정됨)으로 등록되었는지 확인한다.	
+			return 0;
+		}else {
+			return 1;
+		}
+		
+	}
+~~~
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/2-5.PNG)
  
 ## 실기 영상
  클라이언트가 서버에 어떤 요청을 하면 스프링에서 제공하는 DispatcherServlet라는 Front-Controller가 요청을 가로챈다. 
