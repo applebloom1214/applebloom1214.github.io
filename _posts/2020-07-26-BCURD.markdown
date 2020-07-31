@@ -4,4 +4,4 @@ title:  "주요 기능 - 게시글 CURD"
 ---
 ## 개관
 
- ![Gatok Jekyll Theme]({{site.baseurl}}/images/3-1.png)
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/3-1.PNG)
