@@ -1,4 +1,15 @@
 ---
 layout: post
-title:  "주요 기능 - 회원 등록, 로그인, "
+title:  "주요 기능 - 회원 등록, 로그인, 로그아웃"
 ---
+## 개관
+
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/2-4.png)
+
+
+## 동작 과정
+
+
+ 
+## 실기 영상
+ 클라이언트가 서버에 어떤 요청을 하면 스프링에서 제공하는 DispatcherServlet라는 Front-Controller가 요청을 가로챈다. 
