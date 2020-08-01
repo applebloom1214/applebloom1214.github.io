@@ -6,9 +6,128 @@ title:  "주요 기능 - 파일 업로드"
 
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/5-1.png)<br>
 <br>
-댓글 등록은 게시판과는 다르게 AJAX를 이용하여 비동기 방식으로 구현하였다.<br>
+파일 업로드는 첨부파일을 별도로 처리하는 AJAX 방식을 사용하며<br>
+스프링 자체 파일 업로드 처리 API를 이용하였다<br>
 <br>
-## 댓글등록(CREATE) 동작 과정 및 주요 메소드<br>
- ■ 댓글등록 요청 > 컨트롤러 > 서비스 & 구현 > Mybatis(DAO구현) > DB > 컨트롤러 > VIEW로 반환<br> 
+## 파일 업로드 동작 과정 및 주요 메소드<br>
+ ■ 파일 업로드 요청 > 컨트롤러 > 서비스 & 구현 > Mybatis(DAO구현) > DB > 컨트롤러 > VIEW로 반환<br> 
  <br>
- 댓글 CURD 공통처리<br>
+ 파일 업로드 공통처리<br>
+~~~c
+// servlet-context.xml
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+	</beans:bean> // 스프링 업로드 처리를 위한 StandardServletMultipartResolver 객체를 Bean에 등록한다
+~~~
+<br>
+AJAX 파일 업로드 처리를 위한 formObj 객체
+<br>
+~~~c
+//register.jsp
+$(document).ready(function(e){
+
+ // formObj : 페이지 전환 없이 폼데이터를 제출하고 싶을 때 쓰는 객체(AJAX를 사용하기 위함)
+  var formObj = $("form[role='form']");
+  
+  $("button[type='submit']").on("click", function(e){
+    
+    e.preventDefault(); // 기본 form 태그의 기능을 막아준다
+    ..................
+~~~
+<br>
+비동기 전송을 사용하기 위한 JQUERY 메소드
+<br>
+~~~c
+ $("input[type='file']").change(function(e){....}
+ // change() 함수는 지정된 객체의 변동을 체크한다
+~~~
+<br>
+업로드 파일 체크
+<br>
+~~~c
+  var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+  // 정규식을 통해 금지 파일 형식을 정함
+  var maxSize = 5242880; // 최대 사이즈 지정
+  
+  function checkExtension(fileName, fileSize){
+	    // 업로드 파일 체크를 위한 메소드
+	    if(fileSize >= maxSize){
+	      alert("파일 사이즈 초과");
+	      return false;
+	    }
+	    
+	    if(regex.test(fileName)){
+	      alert("해당 종류의 파일은 업로드할 수 없습니다.");
+	      return false;
+	    }
+	    return true;
+	  }//checkExtension
+~~~
+<br>컨트롤러 업로드 처리
+<br>
+~~~c
+// UploadController.java
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
+
+		List<AttachFileDTO> list = new ArrayList<>();
+		String uploadFolder = "C:\\upload"; // 업로드 파일 위치 설정
+
+		String uploadFolderPath = getFolder(); // 나눠서 저장하기 위한 폴더 생성 메소드 호출
+		
+		File uploadPath = new File(uploadFolder, uploadFolderPath);
+
+		if (uploadPath.exists() == false) {
+			uploadPath.mkdirs(); // 폴더가 존재하지 않으면 새로 생성한다
+		}
+		// make yyyy/MM/dd folder
+
+		for (MultipartFile multipartFile : uploadFile) {
+
+			AttachFileDTO attachDTO = new AttachFileDTO();
+
+			String uploadFileName = multipartFile.getOriginalFilename();
+
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+			attachDTO.setFileName(uploadFileName);
+
+			UUID uuid = UUID.randomUUID(); // 파일 이름 중복을 막기위해 UUID(고유 식별자)를 생성한다
+
+			uploadFileName = uuid.toString() + "_" + uploadFileName;
+
+			try {
+				File saveFile = new File(uploadPath, uploadFileName);
+				multipartFile.transferTo(saveFile); // transferTo 메소드는 multipartFile 객체를 File 형식으로 변환해준다
+
+				attachDTO.setUuid(uuid.toString());
+				attachDTO.setUploadPath(uploadFolderPath);
+
+				if (checkImageType(saveFile)) { // checkImageType 메소드를 호출하여 이미지 파일인지 확인
+
+					attachDTO.setImage(true);
+
+					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+
+					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100); 
+     // 썸네일을 만들어주는 Thumbnailator api 사용
+
+					thumbnail.close();
+				}
+
+				// add to List
+				list.add(attachDTO);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} // end for
+		return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+~~~
+<br><br>
+## 파일 업로드 확인 및 주요 메소드<br>
+ <br>
+ 파일 업로드 공통처리<br>
