@@ -107,7 +107,9 @@ public int register(ReplyVO vo) {
 	  public ResponseEntity<String> modify( @RequestBody ReplyVO vo, @PathVariable("rno") Long rno) {...}
  ~~~
  <br>
- ## 실기 영상<br>
+ <br>
+  
+## 실기 영상<br>
  리플등록<br>
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/4-1.gif)
  <br><br>
