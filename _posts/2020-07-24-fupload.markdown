@@ -264,5 +264,7 @@ public ResponseEntity<String> deleteFile(String fileName, String type) {
   
 ## 실기 영상<br>
  첨부파일 등록<br>
-  ![Gatok Jekyll Theme]({{site.baseurl}}/images/4-1.gif)
+  ![Gatok Jekyll Theme]({{site.baseurl}}/images/5-1.gif)
  <br><br>
+ 첨부파일 확인<br>
+  ![Gatok Jekyll Theme]({{site.baseurl}}/images/5-2.gif)
