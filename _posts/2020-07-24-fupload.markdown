@@ -129,5 +129,140 @@ $(document).ready(function(e){
 ~~~
 <br><br>
 ## 파일 업로드 확인 및 주요 메소드<br>
+<br>
+ 첨부파일 비동기 처리
+<br>
+~~~c
+ // get.jsp
+    var bno = '<c:out value="${board.bno}"/>';
+    //get으로 접근(게시글 READ)시 AJAX로 첨부파일 리스트를 요청하여 받아온다
+    $.getJSON("/happy/getAttachList", {bno: bno}, function(arr){
+        
+       console.log(arr);
+       
+       var str = "";
+       var str2 = "";
+       
+       $(arr).each(function(i, attach){
+       
+         //image type
+         if(attach.fileType){
+           var fileCallPath =  encodeURIComponent( attach.uploadPath+ "/s_"+attach.uuid +"_"+attach.fileName);
+           var fileCallPath2 =  encodeURIComponent( attach.uploadPath+ "/"+attach.uuid +"_"+attach.fileName);
+           
+           str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
+           str += "<img src='/display?fileName="+fileCallPath+"'>";
+           str += "</div>";
+           str +"</li>";
+           
+           str2 += "<img src='/display?fileName="+fileCallPath2+"'>"+"<br>";        
+         }else{
+             
+           str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
+           str += "<span> "+ attach.fileName+"</span><br/>";
+           str += "<img src='/resources/img/attach.png'></a>";
+           str += "</div>";
+           str +"</li>";
+         }
+       });
+~~~
+<br><br>
+~~~c
+ //BoardController.java
+	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE) 
+	 // DB에서 가져온 첨부파일 목록을 JSON으로 전송해준다
+	@ResponseBody
+	public ResponseEntity<List<BoardAttachVO>> getAttachList(Long bno) {
+
+		log.info("getAttachList " + bno);
+
+		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK);
+
+	}
+~~~
+<br><br>
+ 이미지와 일반파일 섬네일 처리<br>
+ ~~~c
+ //get.jsp
+   $(".uploadResult").on("click","li", function(e){
+      
+	    console.log("view image");
+	    
+	    var liObj = $(this);
+	    
+	    var path = encodeURIComponent(liObj.data("path")+"/" + liObj.data("uuid")+"_" + liObj.data("filename"));
+	    // 파일 이름에 한글이나 공백 등이 들어가면 문제가 발상하기에 encodeURIComponent를 통해 올바른 문자열을 생성한다
+	    
+	    if(liObj.data("type")){  // type의 타입은 boolean으로 이미지일 경우 true로 설정
+	      showImage(path.replace(new RegExp(/\\/g),"/")); // showImage 함수를 통한 섬네일 이미지를 표시
+	    }else { // 일반 파일은 클릭시 다운로드 할 수 있게 한다.
+	      self.location ="/download?fileName="+path
+	    }    
+	  });
+ ~~~
+ <br><br>
+## 파일 삭제 및 주요 메소드<br>
+<br>
+ 첨부파일 등록 과정에서 삭제 처리
+<br>
+~~~c
+//UploadController.java
+@PreAuthorize("isAuthenticated()")
+@PostMapping("/deleteFile") // 
+@ResponseBody
+public ResponseEntity<String> deleteFile(String fileName, String type) {
+
+	// view에 생성된 button을 클릭하면 AJAX를 통해 delete 요청을 받아와서 컨트롤러에서 이를 수행한다.
+
+	File file;
+
+	try {
+		file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8")); 
+		 //웹페이지로 인코딩된 파일 경로를 JAVA 형식으로 디코딩해준다
+
+		file.delete();
+
+		if (type.equals("image")) {
+
+			String largeFileName = file.getAbsolutePath().replace("s_", "");
+                        // 섬네일 이미지 뿐만 아니라 본래 이미지도 삭제한다
+			file = new File(largeFileName);
+
+			file.delete();
+		}
+
+	} catch (UnsupportedEncodingException e) {
+		e.printStackTrace();
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+
+	return new ResponseEntity<String>("deleted", HttpStatus.OK);
+
+}
+~~~
+<br><br>
+ 게시글 READ에서 첨부파일 삭제 처리<br>
+ ~~~c
+ // BoardController.java
+ 	@PreAuthorize("principal.username == #writer")
+	@PostMapping("/remove")
+	public String remove(@RequestParam("bno") Long bno, Criteria cri, RedirectAttributes rttr) {
+
+		List<BoardAttachVO> attachList = service.getAttachList(bno);
+
+		if (service.remove(bno)) {
+
+			deleteFiles(attachList); // 위의 메서드와 동일한 deleteFiles 메소드를 호출하여 첨부파일 삭제
+
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/happy/list" + cri.getListLink();
+	}
+ ~~~
+  <br>
  <br>
- 파일 업로드 공통처리<br>
+  
+## 실기 영상<br>
+ 첨부파일 등록<br>
+  ![Gatok Jekyll Theme]({{site.baseurl}}/images/4-1.gif)
+ <br><br>
