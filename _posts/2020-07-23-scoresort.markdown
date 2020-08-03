@@ -6,7 +6,7 @@ title:  "기타 기능 - 평점 & 게시판 정렬"
 ## 게시글 평점 개관 및 주요 메서드<br>
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/6-1.png)<br>
 <br>
- AJAX 댓글 추가시 평점도 추가하여 평점 기능을 
+ AJAX 댓글 추가시 평점도 추가하여 평점 기능을 구현하였다
 <br>
  <br>
  AJAX 평점 처리<br>
@@ -93,7 +93,7 @@ title:  "기타 기능 - 평점 & 게시판 정렬"
 ## 게시판 정렬 개관 및 주요 메서드<br>
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/6-2.png)<br>
 <br>
- 최신수, 댓글 TOP 10, 평점 TOP10 세 종류로 정렬을 구현하였다.
+ 최신수, 댓글 TOP 10, 평점 TOP10 세 종류로 정렬을 구현하였다
 <br>
  <br>
  정렬을 위한 게시판, 댓글 테이블
