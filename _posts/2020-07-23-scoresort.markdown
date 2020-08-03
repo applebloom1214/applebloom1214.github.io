@@ -108,34 +108,34 @@ title:  "기타 기능 - 평점 & 게시판 정렬"
  <br>
  ~~~c
      // list.jsp
- 						//최신순 버튼 클릭 이벤트
-						$("#latest").on("click", function(e) {
+ 	//최신순 버튼 클릭 이벤트
+	$("#latest").on("click", function(e) {
 
-							e.preventDefault();
-							self.location = "/happy/list";
-							//self = 현재창 자신 window와 같음
-						});
+		e.preventDefault();
+		self.location = "/happy/list";
+		//self = 현재창 자신 window와 같음
+	});
 						
-						//평점순 버튼 클릭 이벤트
-						$("#score").on("click", function(e) {
+	//평점순 버튼 클릭 이벤트
+	$("#score").on("click", function(e) {
 
-							var sortForm = $("#sortForm");
-							e.preventDefault();
-							sortForm.find("input[name='sort']")
-							.val($(this).attr("name"));
-							sortForm.submit();
+		var sortForm = $("#sortForm");
+		e.preventDefault();
+		sortForm.find("input[name='sort']")
+		.val($(this).attr("name"));
+		sortForm.submit();
 							
-						});
+	});
 						
-						//댓글순 버튼 클릭 이벤트
-						$("#replycnt").on("click", function(e) {
+	//댓글순 버튼 클릭 이벤트
+	$("#replycnt").on("click", function(e) {
 
-							var sortForm = $("#sortForm");
-							e.preventDefault();
-							sortForm.find("input[name='sort']")
-							.val($(this).attr("name"));
-							sortForm.submit();
-						});
+		var sortForm = $("#sortForm");
+		e.preventDefault();
+		sortForm.find("input[name='sort']")
+		.val($(this).attr("name"));
+		sortForm.submit();
+	});
  ~~~
   <br><br>
  SORT 종류에 따른 컨트롤러 처리
