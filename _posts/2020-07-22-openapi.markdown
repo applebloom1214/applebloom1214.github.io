@@ -40,3 +40,61 @@ title:  "기타 기능 - OPEN API 이용"
 	</div>
 </div>
  ~~~
+<br><br>
+ 컨트롤러 처리
+<br>
+~~~c
+ // api.java
+public class api {
+
+
+  public Finedust getFinddust() {
+	  
+	  Finedust fd = new Finedust(); // 수치(value)와 상태(status)를 담을 VO
+	  
+	  BufferedReader br = null; // OPEN API로 얻어온 데이터를 읽기 위한 입력 스트림
+      try{            
+          String urlstr = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/....(생략)";
+          URL url = new URL(urlstr); // OPEN API URL 생성
+          HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection(); // 입력 스트림을 얻기위해 커넥션을 생성
+          urlconnection.setRequestMethod("GET");
+          br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(),"UTF-8"));
+          String result = "";
+          String status = "";
+          String line;
+          while((line = br.readLine()) != null) { // API 데이터를 한줄씩 읽는다
+        	  if(line.contains("pm10Value")) {
+        		  result = line;
+        		  int start = result.indexOf(">");
+        		  int end = line.indexOf("<", start);
+        		result = result.substring(start+1,end); // 미세먼지 수치를 얻기위해 String.substring을 이용
+                  break;  
+        	  }     
+          }// 미세먼지 값 추출
+        int value = Integer.parseInt(result); // String 값을 int로 파싱함
+        if(value <= 30) { // 미세먼지 수치에 따른 status 생성
+        	status += "좋음";
+        }
+        else if(value <=80) {
+        	status += "보통";
+        }
+        else {
+        	status += "나쁨";
+        }
+        fd.setStatus(status);
+        fd.setValue(value);
+      }catch(Exception e){
+          System.out.println(e.getMessage());
+      }	  
+	  return fd;
+  }
+  
+}
+~~~
+   <br>
+ <br>
+  
+## 실기 영상<br>
+ OPEN API 용<br>
+  ![Gatok Jekyll Theme]({{site.baseurl}}/images/7.gif)
+ <br><br>
