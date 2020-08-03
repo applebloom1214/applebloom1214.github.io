@@ -1,0 +1,42 @@
+---
+layout: post
+title:  "기타 기능 - OPEN API 이용"
+---
+<br>
+## OPEN API 개관 및 주요 메서드<br>
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/7-1.PNG)<br>
+<br><br>
+ ![Gatok Jekyll Theme]({{site.baseurl}}/images/7-2.PNG)<br>
+<br><br>
+ OPEN API란 웹페이지 제작에 유용하게 사용할 수 있는<br>
+ 누구에게나 오픈된 API를 말하며, <br>
+ 본 게시판은 공공데이터포털의 미세먼지 API를 사용하였다<br>
+<br>
+ <br>
+ VIEW단 처리<br>
+ <br>
+ ~~~c
+ <div class="searchi" align="center">
+	<br> <h4><b>현 시각 미세먼지 정보</b></h4>
+	<p id="show"></p>
+	<div>
+	 <table>
+	  <tr>
+	  <th>원종동</th> // 테스트를 위해 원종동으로 고정
+	  <th>&nbsp;${finedust.value}</th> // 미세먼지 수치
+	  <th>&nbsp;${finedust.status} // 미세먼지 상태
+	   <c:if test="${finedust.status=='좋음'}"> // 상태에 따라 표시되는 아이콘이 다름
+	   <img src="/resources/img/1.png" width="30px" height="30px" id="header">
+	   </c:if>
+	   <c:if test="${finedust.status=='보통'}">
+	   <img src="/resources/img/2.png" width="30px" height="30px" id="header">
+	   </c:if>
+	   <c:if test="${finedust.status=='나쁨'}">
+	   <img src="/resources/img/3.png" width="30px" height="30px" id="header">
+	   </c:if> 
+	  </th>
+	  </tr>
+	 </table>
+	</div>
+</div>
+ ~~~
