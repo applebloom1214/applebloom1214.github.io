@@ -95,6 +95,6 @@ public class api {
  <br>
   
 ## ※ 실기 영상<br>
- OPEN API 용<br>
+ <br>
   ![Gatok Jekyll Theme]({{site.baseurl}}/images/7.gif)
  <br><br>
