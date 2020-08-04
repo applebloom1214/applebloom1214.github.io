@@ -3,7 +3,7 @@ layout: post
 title:  "보완할 점 / 느낀점"
 ---
 <br>
-## 보완할 점<br><br>
+__## 보완할 점__<br><br>
  ● VIEW 단의 꾸밈 부족 <br>
  &nbsp;ㄴ HTML/CSS/JAVASCRIPT의 기본은 알고 있으나 기본 레이아웃 구성은 복잡한 영역이라<br>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;부트스트랩의 도움을 받았고, 어딘가 심심한 부분이 있어 아쉽다. <br><br>
