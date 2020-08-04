@@ -2,7 +2,7 @@
 layout: post
 title:  "주요 기능 - 회원 등록, 로그인, 로그아웃"
 ---
-## 개관
+## ※ 개관
 
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/2-4.png)
  
@@ -25,7 +25,7 @@ title:  "주요 기능 - 회원 등록, 로그인, 로그아웃"
 	</filter-mapping>
  ~~~
  <br>
-## 회원가입 동작 과정 및 주요 메소드<br>
+## ※ 회원가입 동작 과정 및 주요 메소드<br>
  ■ 회원가입 요청 > 컨트롤러 > 서비스 & 구현 > Mybatis(DAO구현) > DB > 컨트롤러 > VIEW로 반환<br> 
  <br>
  스프링 시큐리티 접근제한<br>
@@ -114,7 +114,7 @@ $('#btnsign').on("click", function(e){
  비밀번호가 암호화되었다.<br>
  
   <br>
-##  로그인 동작 과정 및 주요 메소드<br>
+## ※ 로그인 동작 과정 및 주요 메소드<br>
   ■ 로그인 요청 > 컨트롤러 > 서비스 & 구현 > Mybatis(DAO구현) > 인증 및 인가 > 컨트롤러 > VIEW로 반환<br> 
  <br>
  <br>
@@ -184,7 +184,7 @@ public class CustomUser extends User {
 }
 ~~~
 <br><br>
-##  로그아웃 동작 과정 및 주요 메소드<br>
+## ※ 로그아웃 동작 과정 및 주요 메소드<br>
   ■ 로그아웃 요청 > 컨트롤러 > 서비스 & 구현 > Mybatis(DAO구현) > 내부 로그아웃 처리 > 컨트롤러 > VIEW로 반환<br> 
  <br>
  <br>
@@ -214,7 +214,7 @@ public class CustomUser extends User {
   ~~~
   <br>
   
-## 실기 영상<br>
+## ※ 실기 영상<br>
  회원가입<br>
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/1.gif)
  <br><br>
