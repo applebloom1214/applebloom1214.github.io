@@ -3,7 +3,7 @@ layout: post
 title:  "기타 기능 - OPEN API 이용"
 ---
 <br>
-## OPEN API 개관 및 주요 메서드<br>
+## ※ OPEN API 개관 및 주요 메서드<br>
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/7-1.PNG)<br>
 <br><br>
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/7-2.PNG)<br>
@@ -94,7 +94,7 @@ public class api {
    <br>
  <br>
   
-## 실기 영상<br>
+## ※ 실기 영상<br>
  OPEN API 용<br>
   ![Gatok Jekyll Theme]({{site.baseurl}}/images/7.gif)
  <br><br>
