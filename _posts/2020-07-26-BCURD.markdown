@@ -2,12 +2,12 @@
 layout: post
 title:  "주요 기능 - 게시글 CURD"
 ---
-## 개관
+## ※ 개관
 
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/3-1.PNG)<br>
 <br>
 <br>
-## 글등록(CREATE) 동작 과정 및 주요 메소드<br>
+## ※ 글등록(CREATE) 동작 과정 및 주요 메소드<br>
  ■ 글등록 요청 > 컨트롤러 > 서비스 & 구현 > Mybatis(DAO구현) > DB > 컨트롤러 > VIEW로 반환<br> 
  <br>
  로그인된 사용자만 글등록 가능<br>
@@ -39,7 +39,7 @@ title:  "주요 기능 - 게시글 CURD"
 	} 
  ~~~
 <br>
-## 글읽기(READ) 동작 과정 및 주요 메소드<br>
+## ※ 글읽기(READ) 동작 과정 및 주요 메소드<br>
  ■ 글읽기 요청 > 컨트롤러 > 서비스 & 구현 > Mybatis(DAO구현) > DB > 컨트롤러 > VIEW로 반환<br> 
  <br>
  페이징<br>
@@ -68,7 +68,7 @@ title:  "주요 기능 - 게시글 CURD"
  <br>
  
 <br>
-## 글수정&삭제(UPDATE & DELETE) 동작 과정 및 주요 메소드<br>
+## ※ 글수정&삭제(UPDATE & DELETE) 동작 과정 및 주요 메소드<br>
  ■ 글수정 OR 삭제 요청 > 컨트롤러 > 서비스 & 구현 > Mybatis(DAO구현) > DB > 컨트롤러 > VIEW로 반환<br> 
  <br>
  본인 글만 수정 OR 삭제 가능
@@ -89,7 +89,7 @@ title:  "주요 기능 - 게시글 CURD"
 	}
  ~~~
 <br>
-## 검색 및 페이징<br>
+## ※ 검색 및 페이징<br>
   <br>
  주요 메소드
  <br>
@@ -118,7 +118,7 @@ title:  "주요 기능 - 게시글 CURD"
  <br>
    <br>
   
-## 실기 영상<br>
+## ※ 실기 영상<br>
  글등록<br>
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/3-1.gif)
  <br><br> 
