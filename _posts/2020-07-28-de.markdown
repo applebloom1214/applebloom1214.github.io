@@ -2,16 +2,16 @@
 layout: post
 title:  "설계 구조 및 기본 동작 과정"
 ---
-## HappyProg 자바 패키지 구조
+## ※ HappyProg 자바 패키지 구조
 
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/class.png)
 
 
-## HappyProg DB 모델링
+## ※ HappyProg DB 모델링
 
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/db2.PNG)
  
-## SPRING MVC 동작 과정
+## ※ SPRING MVC 동작 과정
  클라이언트가 서버에 어떤 요청을 하면 스프링에서 제공하는 DispatcherServlet라는 Front-Controller가 요청을 가로챈다. 
  ![Gatok Jekyll Theme]({{site.baseurl}}/images/1-1.PNG)
  
